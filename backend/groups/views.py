@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from groups.serializers import GroupSerializer 
 
 # Create your views here.
 @api_view(['POST'])
@@ -9,10 +10,11 @@ def create_group(request):
     """
     Handle the creation of a new group.
     """
-    group_name = request.data.get('group_name')
-    description = request.data.get('description')
-    # Implement your group creation logic here
-    return Response({"message": "Group created successfully"}, status=status.HTTP_201_CREATED)  
+    group_serializer = GroupSerializer(data=request.data)
+    if group_serializer.is_valid():
+        group_serializer.save()
+        return Response({"message": "Group created successfully"}, status=status.HTTP_201_CREATED)
+    return Response(group_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def get_groups(request):

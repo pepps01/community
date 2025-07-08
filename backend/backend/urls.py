@@ -12,5 +12,5 @@ urlpatterns = [
    path('api/groups/', get_groups, name='get_groups'),
    path('api/groups/create/', create_group, name='create_group'),
    path('api/authe/login/', login_api, name='login'),
-   path('api/user/register/', register_api, name='register'),
+   path('api/users/register', register_api, name='register'),
 ]

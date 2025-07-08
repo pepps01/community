@@ -6,4 +6,4 @@ const Post: React.FC = () => {
     )
 }
 
-export default Post
+export default Post 

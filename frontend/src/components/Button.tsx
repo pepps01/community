@@ -1,8 +1,10 @@
 import React from 'react'
 
-const Button: React.FC = () => {
+const Button: React.FC<{ type: "button" | "submit"; title: string }> = ({ type, title }) => {
     return (
-        <div>Button</div>
+        <button type={type} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded w-full my-4">
+            {title}
+        </button>
     )
 }
 
