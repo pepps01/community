@@ -6,10 +6,20 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    netcat gcc libmariadb-dev \
-    && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y
 
+# RUN gcc \
+#     default-libmysqlclient-dev \
+#     python3-dev \
+#     netcat \
+#     && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    default-libmysqlclient-dev \
+    gcc \
+    build-essential \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+# 
 RUN pip install --upgrade pip
 
 COPY requirements.txt .

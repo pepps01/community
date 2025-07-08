@@ -5,6 +5,8 @@ django-filter==25.1
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
 Markdown==3.8.2
+mysql-connector-python==9.3.0
+mysqlclient==2.2.7
 Pygments==2.19.2
 PyJWT==2.9.0
 sqlparse==0.5.3
