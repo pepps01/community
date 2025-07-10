@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from .models import Post
 from groups.models import Group
-from users.models import User   
 
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class PostSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())

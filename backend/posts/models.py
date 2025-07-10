@@ -1,6 +1,8 @@
 from django.db import models
-from users.models import User
 from groups.models import Group
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class Post(models.Model):
     id = models.BigAutoField(primary_key=True)

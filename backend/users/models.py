@@ -1,10 +1,10 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-class User(models.Model):
+class CustomUser(AbstractUser):
     id= models.BigAutoField(primary_key=True)
-    name=models.CharField(name="", max_length=50, null=True, blank=True)
+    name=models.CharField(max_length=50, null=True, blank=True)
     email= models.EmailField(unique=True, max_length=100)
     password =  models.CharField(max_length=250)
     is_active = models.BooleanField(default=True)
@@ -19,3 +19,6 @@ class User(models.Model):
         indexes=[
             models.Index(fields=["email"])
         ]
+
+    def __str__(self):
+        return self.email
