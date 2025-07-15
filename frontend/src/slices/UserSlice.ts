@@ -9,7 +9,6 @@ interface UserSlice {
     login: (credentials: any) => Promise<void>;
     logout: () => Promise<void>;
     getUser: (userId: string) => Promise<void>;
-    updateUser: (userId: string, userData: any) => Promise<void>;
 }
 
 const createUserSlice: StateCreator<UserSlice> = (set: any) => ({
@@ -20,6 +19,8 @@ const createUserSlice: StateCreator<UserSlice> = (set: any) => ({
             const response = await axios.post(`${BASE_URL}/users/register`, userData);
             console.log('Registration response:', response.data);
             set({ user: response.data });
+            window.location.href = '/';
+
         } catch (err: any) {
             const errorData = err.response?.data?.errors;
             const errorMessage = typeof errorData === 'object'
@@ -47,10 +48,6 @@ const createUserSlice: StateCreator<UserSlice> = (set: any) => ({
     },
     getUser: async (userId: string) => {
         const response = await axios.get(`${BASE_URL}/api/users/${userId}`);
-        set({ user: response.data });
-    },
-    updateUser: async (userId: string, userData: any) => {
-        const response = await axios.put(`${BASE_URL}/api/users/${userId}`, userData);
         set({ user: response.data });
     }
 })

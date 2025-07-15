@@ -28,9 +28,8 @@ const createPostSlice: StateCreator<PostSlice> = (set: any) => ({
                     },
                 }
             );
-            console.log("response", response)
-            console.log('data', data)
             set(() => ({ posts: response.data }))
+            window.location.href = '/';
         } catch (err: any) {
             const errorData = err.response?.data?.errors;
             const errorMessage = typeof errorData === 'object'

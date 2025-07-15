@@ -20,7 +20,9 @@ const Navbar: React.FC = () => {
 
     return (
         <div className='bg-gray-800 text-white p-2 py-4 w-full flex justify-around items-center mb-4'>
-            <div className='text-lg font-bold'>Community Hub</div>
+            <Link href={"/"}>
+                <div className='text-lg font-bold'>Community Hub</div>
+            </Link>
             <div>
                 <ul className='flex space-x-4 gap-8'>
                     {hasToken ? (
