@@ -53,12 +53,14 @@ Build a community application with:
    git clone https://github.com/pepps01/community-app.git
    cd community/backend
 
-2. Create an Virtual Environment and Run  
+2. Create a Virtual Environment and Run
+   ```bash
     python -m venv venv
     source venv/bin/activate
     pip install -r requirements.txt
 
 3. Create .env (or use settings.py directly) and set MySQL DB credentials.
+   ```bash
     python manage.py makemigrations
     python manage.py migrate
     python manage.py runserver
