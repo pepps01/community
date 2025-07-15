@@ -6,12 +6,8 @@ import { useStore } from '../../../store'
 
 const Post: React.FC = () => {
     const { getPosts, posts, group_loading } = useStore()
-    useEffect(() => {
-        getPosts()
-        console.log("groups fetching,,,", posts)
-    }, [])
+    useEffect(() => { getPosts() }, [])
 
-    // const posts = getPost()
     return (
         <div>
             <Navbar />

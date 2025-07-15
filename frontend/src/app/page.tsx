@@ -15,9 +15,8 @@ const Home: React.FC = () => {
   }, [])
 
   if (loading) return <p>loading posts</p>
-
   return (
-    <div className="">
+    <div>
       <Navbar />
       <div className="w-[1000px] mx-auto">
         <div className="flex flex-row justify-end items-center w-full">

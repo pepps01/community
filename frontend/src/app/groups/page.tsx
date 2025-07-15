@@ -18,9 +18,8 @@ const Group: React.FC = () => {
     return (
         <div>
             <Navbar />
-            {/* <GroupCreate /> */}
-            <div>
-                <Link href={"/groups/create"}>Create A Group</Link>
+            <div className="flex flex-row justify-end items-center w-full">
+                <Link href={"/group/create"} className="bg-gray-800 hover:bg-blue-700 text-center text-white font-bold py-3 px-4 rounded my-2 cursor-pointer w-[200px]">Create Group</Link>
             </div>
             <div>
                 {groups.length === 0 ? (
