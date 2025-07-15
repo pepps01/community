@@ -11,10 +11,8 @@ from rest_framework import permissions
 @permission_classes([permissions.IsAuthenticated])
 def create_group(request):
     group_serializer = GroupSerializer(data=request.data)
-    print("group serilaizer",group_serializer)
     if group_serializer.is_valid():
         group_serializer.save(user=request.user)
-        print("posts", group_serializer)
         return Response({"message": "Group created successfully", "data": group_serializer.data}, status=status.HTTP_201_CREATED)
     return Response(group_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

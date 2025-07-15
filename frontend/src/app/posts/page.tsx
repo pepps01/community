@@ -15,26 +15,10 @@ const Post: React.FC = () => {
     return (
         <div>
             <Navbar />
-            <div>Post</div>
-            <div className='flex justify-center w-[400px]'>
+            <div className='flex flex-row justify-start'>
                 <PostCreate />
-
-                <div>
-                    {posts.length === 0 ? (
-                        <div>Sorry</div>
-                    ) : (
-                        posts.map((post: any) => (
-                            <div className='' key={post.id}>
-                                <h2>{post?.title}</h2>
-                                <p>{post?.content}</p>
-                            </div>
-                        ))
-                    )}
-                </div>
             </div>
-
         </div>
     )
 }
-
 export default Post 

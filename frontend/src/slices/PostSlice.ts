@@ -35,7 +35,7 @@ const createPostSlice: StateCreator<PostSlice> = (set: any) => ({
             const errorData = err.response?.data?.errors;
             const errorMessage = typeof errorData === 'object'
                 ? Object.values(errorData).flat().join(', ')
-                : 'Registration failed.';
+                : 'Groups failed.';
             set({ type: 'error', message: errorMessage });
         }
     },
@@ -47,13 +47,10 @@ const createPostSlice: StateCreator<PostSlice> = (set: any) => ({
         set({ loading: true, error: null })
         try {
             const response = await axios.get(`${BASE_URL}/posts`);
-            console.log('Fetched posts:', response.data);
             set(() => ({ posts: response.data, loading: false }));
-            // set((state: any) => ({ posts: [response.data, ...state.posts] }));
             return true;
         } catch (errors: any) {
             set({ loading: true, error: null })
-            console.error('Fetching posts failed:', errors.response?.data || errors);
             return false;
         }
     },

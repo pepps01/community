@@ -10,6 +10,7 @@ from posts.models import Post  # Assuming you have a Post model defined in posts
 @permission_classes([permissions.IsAuthenticated])
 def create_post(request):
     post = PostSerializer(data=request.data)
+
     print("psts", post)
     if post.is_valid():
         post.save(user=request.user)

@@ -12,7 +12,7 @@ const Login: React.FC = () => {
         <div className="flex flex-col items-center justify-start h-screen bg-gray-100 p-4 w-full">
 
             <div className='flex flex-col items-center  p-4 max-w-[1000px]'>
-                <div>Login</div>
+                <div className='text-xl font-bold'>Login</div>
                 <div>
                     <Formik
                         initialValues={{ email: '', password: '' }}

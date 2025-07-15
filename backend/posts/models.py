@@ -14,4 +14,4 @@ class Post(models.Model):
 
     class Meta:
         db_table="posts"
-        ordering= ['created_at']
+        # ordering= ['created_at']

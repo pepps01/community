@@ -7,7 +7,6 @@ import Button from '@/components/Button';
 
 const Group: React.FC = () => {
     const { groups, getGroups, group_loading } = useStore()
-    // const groups = useStore((state: any) => state.groups);
 
     useEffect(() => {
         getGroups()
@@ -16,15 +15,12 @@ const Group: React.FC = () => {
 
 
     if (group_loading) return <p>loading posts</p>
-    console.log("posts counts", groups)
-
-
+    console.log("groups", groups.length)
     return (
         <div>
             <Navbar />
-            <div>Welcome</div>
-            <GroupCreate />
-            {/* <div>
+            {/* <GroupCreate /> */}
+            <div>
                 {groups.length === 0 ? (
                     <div className="text-gray-500 text-lg flex flex-col items-center justify-center">
                         No posts available. Please create a post.
@@ -36,12 +32,12 @@ const Group: React.FC = () => {
                 ) : (
                     groups.map((group: any) => (
                         <div key={group.id} className="bg-white shadow-md rounded-lg p-4 m-2">
-                            <h2 className="text-xl font-bold">{group.title}</h2>
+                            <h2 className="text-xl font-bold">{group.name}</h2>
                             <p className="text-gray-600">{group.description}</p>
                         </div>
                     ))
                 )}
-            </div> */}
+            </div>
         </div>
     )
 }

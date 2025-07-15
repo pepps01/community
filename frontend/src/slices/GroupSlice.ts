@@ -29,8 +29,7 @@ const createGroupSlice: StateCreator<GroupSlice> = (set: any) => ({
         set({ group_loading: true, error: null });
         try {
             const response = await axios.get(`${BASE_URL}/groups/fetch`);
-            console.log("responses", response.data)
-            set({ groups: response.data, group_loading: false });
+            set(() => ({ groups: response.data, group_loading: false }));
             return true;
         } catch (error: any) {
             set({ error: error.response?.data || 'Failed to load groups', loading: false });
