@@ -16,9 +16,9 @@ const PostCreate = () => {
             <div> Create Post</div>
 
             <Formik
-                initialValues={{ name: '' }}
+                initialValues={{ title: '', content: '', group: 1 }}
                 onSubmit={(values) => {
-                    addPost(values.name);
+                    addPost(values);
                 }}
             >
                 {({
@@ -33,19 +33,29 @@ const PostCreate = () => {
                     <form onSubmit={handleSubmit}>
                         <Input
                             type='text'
-                            name="name"
+                            name="title"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.name}
-                            touched={touched.name}
-                            errors={errors.name}
+                            value={values.title}
+                            touched={touched.title}
+                            errors={errors.title}
+                            placeholder='Enter your name'
+                        />
+                        <Input
+                            type='text'
+                            name="content"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.content}
+                            touched={touched.content}
+                            errors={errors.content}
                             placeholder='Enter your name'
                         />
                         <Button type="submit" title={"Create Post"} />
                     </form>
                 )}
             </Formik>
-        </div>
+        </div >
     )
 }
 

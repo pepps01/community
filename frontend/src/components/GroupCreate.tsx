@@ -1,11 +1,13 @@
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 import { useStore } from '../../store';
 import { Formik } from 'formik';
 import Input from './Input';
 import Button from './Button';
 
 const GroupCreate: React.FC = () => {
-    const { createGroup }: any = useStore();
+    const { addGroup, }: any = useStore();
+
     return (
         <div className="flex flex-col items-center justify-start h-screen bg-gray-100 p-4 w-full">
             <div className='flex flex-col items-center  p-4 max-w-[1000px]'>
@@ -14,7 +16,7 @@ const GroupCreate: React.FC = () => {
                     <Formik
                         initialValues={{ name: '', description: '' }}
                         onSubmit={(values) => {
-                            createGroup(values);
+                            addGroup(values);
                         }}
                     >
                         {({

@@ -10,7 +10,7 @@ urlpatterns = [
    path('admin/', admin.site.urls),
    path('api/posts', get_posts, name='get_posts'),
    path('api/posts/create', create_post, name='create_post'),
-   path('api/groups/', get_groups, name='get_groups'),
+   path('api/groups/fetch', get_groups, name='get_groups'),
    path('api/groups/create', create_group, name='create_group'),
    path('api/auth/login', login_user, name='login'),
    path('api/users/register', register_api, name='register'),

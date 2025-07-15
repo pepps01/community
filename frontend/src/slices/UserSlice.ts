@@ -1,5 +1,6 @@
-import { BASE_URL } from "@/constant/base";
+import API, { BASE_URL } from "@/constant/base";
 import axios from "axios";
+
 import { StateCreator } from "zustand";
 
 interface UserSlice {
@@ -14,18 +15,33 @@ interface UserSlice {
 const createUserSlice: StateCreator<UserSlice> = (set: any) => ({
     user: null,
     register: async (userData: any) => {
-        console.log('Registering user:', userData);
-        const response = await axios.post(`${BASE_URL}/api/users/register`, userData);
-        set({ user: response.data });
+        try {
+            console.log('Registering user:', userData);
+            const response = await axios.post(`${BASE_URL}/users/register`, userData);
+            console.log('Registration response:', response.data);
+            set({ user: response.data });
+        } catch (err: any) {
+            const errorData = err.response?.data?.errors;
+            const errorMessage = typeof errorData === 'object'
+                ? Object.values(errorData).flat().join(', ')
+                : 'Registration failed.';
+            set({ type: 'error', message: errorMessage });
+        }
     },
     login: async (credentials: any) => {
-        console.log('Logging in user:', credentials);
-        const response = await axios.post(`${BASE_URL}/api/users/login`, credentials);
-        set({ user: response.data });
+        const response = await axios.post(`${BASE_URL}/auth/login`, credentials);
+        localStorage.setItem('access_token', response.data.access);
+        localStorage.setItem('refresh_token', response.data.refresh);
+
+        console.log("response", response)
+        console.log('data', response.data.user)
     },
     logout: async () => {
-        await axios.post(`${BASE_URL}/api/users/logout`);
         set({ user: null });
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        delete API.defaults.headers.common['Authorization'];
+        window.location.href = '/login';
     },
     getUser: async (userId: string) => {
         const response = await axios.get(`${BASE_URL}/api/users/${userId}`);

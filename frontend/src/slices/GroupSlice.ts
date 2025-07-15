@@ -1,32 +1,41 @@
-import { BASE_URL } from "@/constant/base";
+import API, { BASE_URL } from "@/constant/base";
 import axios from "axios";
+
 import { StateCreator } from "zustand";
 
 interface GroupSlice {
-    group: number;
-    addGroup: () => Promise<void>;
-    removeGroup: () => void;
-    resetGroup: () => void;
-    setGroup: (group: number) => void;
-    getGroup: () => Promise<void>;
+    groups: any[];
+    group_loading: boolean;
+    error: string | null;
+    addGroup: (data: any) => Promise<void>;
+    getGroups: () => Promise<any>;
 }
 
 const createGroupSlice: StateCreator<GroupSlice> = (set: any) => ({
-    group: 0,
-    addGroup: async () => {
-        await axios.post(`${BASE_URL}/api/groups`, { /* group data */ });
-        set((state: any) => ({
-            group: state.group + 1
-        }));
+    groups: [],
+    group_loading: false,
+    error: null,
+    addGroup: async (data: any) => {
+        const response = await axios.post(`${BASE_URL}/groups/create`, { ...data },
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+        set({ groups: response?.data || 'Failed to load groups', loading: true });
     },
-    removeGroup: () => set((state: any) => ({ group: state.group - 1 })),
-    resetGroup: () => set({ group: 0 }),
-    setGroup: (group: number) => set({ group }),
-    getGroup: async () => {
-        const response = await axios.get(`${BASE_URL}/api/groups`);
-        set((state: any) => ({
-            group: response.data.group
-        }));
+    getGroups: async () => {
+        set({ group_loading: true, error: null });
+        try {
+            const response = await axios.get(`${BASE_URL}/groups/fetch`);
+            console.log("responses", response.data)
+            set({ groups: response.data, group_loading: false });
+            return true;
+        } catch (error: any) {
+            set({ error: error.response?.data || 'Failed to load groups', loading: false });
+            return false;
+        }
     },
 });
 

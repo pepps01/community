@@ -10,7 +10,6 @@ from rest_framework import permissions
 def register_api(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
-        print("Valid:", serializer.validated_data)
         serializer.save()
         return Response({"message": "Registration successful"}, status=status.HTTP_201_CREATED)
     else:

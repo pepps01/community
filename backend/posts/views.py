@@ -9,20 +9,17 @@ from posts.models import Post  # Assuming you have a Post model defined in posts
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
 def create_post(request):
-    data = request.data.copy()
-    data['user'] = request.user.id 
-    data['title'] = request.data.get('title', '')
-    post = PostSerializer(data=data)
+    post = PostSerializer(data=request.data)
+    print("psts", post)
     if post.is_valid():
-        post.save()
-        return Response({"message": "Post created successfully"}, status=status.HTTP_201_CREATED)
+        post.save(user=request.user)
+        return Response({"message": "Post created successfully", "data":post.data}, status=status.HTTP_201_CREATED)
     return Response(post.errors, status=status.HTTP_400_BAD_REQUEST)
  
 
 @api_view(['GET'])
 @permission_classes([permissions.AllowAny])
 def get_posts(request):
-    # pull from the references
     posts = Post.objects.all()
     serializer = PostSerializer(posts, many=True)
     posts = serializer.data

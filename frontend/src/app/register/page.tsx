@@ -4,12 +4,23 @@ import { Formik } from 'formik';
 import { useStore } from '../../../store';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+import { useRouter } from 'next/navigation';
 
 
 const Register: React.FC = () => {
     const { register }: any = useStore();
-    return (
+    const navigate: any = useRouter();
+    const handleRegister = (values: any) => {
+        register(values).then((response: any) => {
+            if (response.success) {
+                navigate.push('/login');
+            } else {
+                console.error('Registration failed:', response.error);
+            }
+        });
+    };
 
+    return (
         <div className='flex flex-col items-center justify-start h-screen bg-gray-100 p-4 w-full'>
 
             <div className='flex flex-col items-center  p-4 max-w-[1000px]'>
@@ -18,7 +29,7 @@ const Register: React.FC = () => {
                     <Formik
                         initialValues={{ name: '', email: '', password: '' }}
                         onSubmit={(values) => {
-                            register(values);
+                            handleRegister(values);
                         }}
                     >
                         {({
