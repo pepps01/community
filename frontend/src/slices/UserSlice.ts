@@ -35,6 +35,8 @@ const createUserSlice: StateCreator<UserSlice> = (set: any) => ({
 
         console.log("response", response)
         console.log('data', response.data.user)
+        window.location.href = '/';
+
     },
     logout: async () => {
         set({ user: null });

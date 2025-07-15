@@ -4,15 +4,14 @@ import Navbar from '@/components/Navbar'
 import React, { useEffect } from 'react'
 import { useStore } from '../../../store';
 import Button from '@/components/Button';
+import Link from 'next/link';
 
 const Group: React.FC = () => {
     const { groups, getGroups, group_loading } = useStore()
 
     useEffect(() => {
         getGroups()
-        console.log("GETTING Groups FROM THE APPLICATION", groups)
     }, [])
-
 
     if (group_loading) return <p>loading posts</p>
     console.log("groups", groups.length)
@@ -20,6 +19,9 @@ const Group: React.FC = () => {
         <div>
             <Navbar />
             {/* <GroupCreate /> */}
+            <div>
+                <Link href={"/groups/create"}>Create A Group</Link>
+            </div>
             <div>
                 {groups.length === 0 ? (
                     <div className="text-gray-500 text-lg flex flex-col items-center justify-center">

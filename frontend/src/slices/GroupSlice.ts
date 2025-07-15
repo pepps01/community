@@ -24,6 +24,7 @@ const createGroupSlice: StateCreator<GroupSlice> = (set: any) => ({
                 },
             });
         set({ groups: response?.data || 'Failed to load groups', loading: true });
+        window.location.href = "/groups"
     },
     getGroups: async () => {
         set({ group_loading: true, error: null });
