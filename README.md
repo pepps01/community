@@ -78,6 +78,7 @@ Build a community application with:
 1. Build and run the various dependencies:
     ```bash
     docker build -f Dockerfile.dev -t cty:latest .
+    docker-compose up
 
 
 ### Folder Structure
